@@ -10,8 +10,34 @@ class CartItem extends React.Component {
       img: '',
     };
   }
+
+  decreaseQuantity = () => {
+    const { qty } = this.state;
+    if (qty === 0) {
+      return;
+    }
+    this.setState((prevState) => {
+      return {
+        qty: prevState.qty - 1,
+      };
+    });
+  };
+
   increaseQuantity = () => {
-    console.log(this.state);
+    // console.log(this.state);
+    //setState is inherited from React component
+    /*
+    setState form 1 || sha;;ow merging
+    this.setState({
+      qty: this.state.qty + 1,
+    });
+    */
+    //  setState form 2
+    this.setState((prevState) => {
+      return {
+        qty: prevState.qty + 1,
+      };
+    });
   };
   render() {
     const { price, title, qty } = this.state;
@@ -35,6 +61,7 @@ class CartItem extends React.Component {
               src="https://image.flaticon.com/icons/svg/659/659892.svg"
               className="action-icon"
               alt="decrease"
+              onClick={this.decreaseQuantity}
             />
             <img
               src="https://image.flaticon.com/icons/svg/1214/1214428.svg"
