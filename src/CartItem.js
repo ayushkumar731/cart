@@ -1,6 +1,7 @@
 import React from 'react';
 
 class CartItem extends React.Component {
+  /*
   decreaseQuantity = () => {
     const { qty } = this.state;
     if (qty === 0) {
@@ -16,12 +17,12 @@ class CartItem extends React.Component {
   increaseQuantity = () => {
     // console.log(this.state);
     //setState is inherited from React component
-    /*
+    
     setState form 1 || sha;;ow merging
     this.setState({
       qty: this.state.qty + 1,
     });
-    */
+    
     //  setState form 2
     this.setState((prevState) => {
       return {
@@ -29,6 +30,7 @@ class CartItem extends React.Component {
       };
     });
   };
+  */
   render() {
     const { price, title, qty } = this.props.product;
     return (
@@ -45,13 +47,13 @@ class CartItem extends React.Component {
               src="https://image.flaticon.com/icons/svg/709/709484.svg"
               className="action-icon"
               alt="increase"
-              onClick={this.increaseQuantity}
+              onClick={() => this.props.onIncreaseQuantity(this.props.product)}
             />
             <img
               src="https://image.flaticon.com/icons/svg/659/659892.svg"
               className="action-icon"
               alt="decrease"
-              onClick={this.decreaseQuantity}
+              onClick={() => this.props.onDecreaseQuantity(this.props.product)}
             />
             <img
               src="https://image.flaticon.com/icons/svg/1214/1214428.svg"
