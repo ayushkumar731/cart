@@ -40,11 +40,27 @@ class App extends React.Component {
     const { products } = this.state;
     const index = products.indexOf(product);
 
-    products[index].qty += 1;
+    // products[index].qty += 1;
 
-    this.setState({
-      products,
-    });
+    // this.setState({
+    //   products,
+    // });
+
+    const docRef = firebase
+      .firestore()
+      .collection('products')
+      .doc(products[index].id);
+
+    docRef
+      .update({
+        qty: products[index].qty + 1,
+      })
+      .then(() => {
+        console.log('Updated Successfully');
+      })
+      .catch((err) => {
+        console.log('Error', err);
+      });
   };
 
   handleDecreaseQuantity = (product) => {
@@ -55,11 +71,26 @@ class App extends React.Component {
       return;
     }
 
-    products[index].qty -= 1;
+    // products[index].qty -= 1;
 
-    this.setState({
-      products,
-    });
+    // this.setState({
+    //   products,
+    // });
+    const docRef = firebase
+      .firestore()
+      .collection('products')
+      .doc(products[index].id);
+
+    docRef
+      .update({
+        qty: products[index].qty - 1,
+      })
+      .then(() => {
+        console.log('Updated Successfully');
+      })
+      .catch((err) => {
+        console.log('Error', err);
+      });
   };
 
   handleDeleteProducts = (id) => {
