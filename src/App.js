@@ -18,6 +18,9 @@ class App extends React.Component {
     firebase
       .firestore()
       .collection('products')
+      // .where('price', '<=', 799)
+      // .where('title', '==', 'Mouse')
+      // .orderBy('price', 'desc')
       .onSnapshot((snapshot) => {
         // snapshot.docs.map((doc) => {
         //   console.log(doc.data());
@@ -139,10 +142,10 @@ class App extends React.Component {
       .collection('products')
       .add({
         img:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSpmtIZu5ueQm0ccThDVjtNpOeWl6S5FkBJdA&usqp=CAU',
-        price: 15000,
-        qty: 3,
-        title: 'Freezeer',
+          'https://images-na.ssl-images-amazon.com/images/I/717V9VrjNML._SL1500_.jpg',
+        price: 799,
+        qty: 5,
+        title: 'Power Bank',
       })
       .then((docRef) => {
         console.log('Product added successfully', docRef);
