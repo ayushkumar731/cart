@@ -94,13 +94,23 @@ class App extends React.Component {
   };
 
   handleDeleteProducts = (id) => {
-    const { products } = this.state;
+    // const { products } = this.state;
 
-    const items = products.filter((item) => item.id !== id);
+    // const items = products.filter((item) => item.id !== id);
 
-    this.setState({
-      products: items,
-    });
+    // this.setState({
+    //   products: items,
+    // });
+    const docRef = firebase.firestore().collection('products').doc(id);
+
+    docRef
+      .delete()
+      .then(() => {
+        console.log('Deleted Successfully');
+      })
+      .catch((err) => {
+        console.log('Error', err);
+      });
   };
 
   getCartCount = () => {
@@ -128,7 +138,8 @@ class App extends React.Component {
       .firestore()
       .collection('products')
       .add({
-        img: '',
+        img:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSpmtIZu5ueQm0ccThDVjtNpOeWl6S5FkBJdA&usqp=CAU',
         price: 15000,
         qty: 3,
         title: 'Freezeer',
@@ -146,7 +157,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar count={this.getCartCount()} />
-        <button onClick={this.addProduct}>Add Product</button>
+        {/* <button onClick={this.addProduct}>Add Product</button> */}
         <Cart
           products={products}
           onIncreaseQuantity={this.handleIncreaseQuantity}
